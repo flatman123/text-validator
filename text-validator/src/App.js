@@ -55,11 +55,11 @@ class App extends React.Component {
     const charBox = this.state.listOfChars
                               .map((char, index) => {
                                 return (                          
-                                  <div className={'char-container'}>
+                                  <div key={this.state.listOfChars[index].id} className={'char-container'}>
                                     <ul  className={'char-styling'}>                                        
                                           <CharComponent  deleteChar={(event) => this.deleteCharHandler(event, this.state.listOfChars[index].id)}
                                                           singleChar={char.char}
-                                                          key={this.state.listOfChars[index].id}
+                                                          
                                                            />                                        
                                       </ul>
                                   </div>)
