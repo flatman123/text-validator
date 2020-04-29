@@ -35,13 +35,14 @@ class App extends React.Component {
   }
 
   deleteCharHandler = ((event,index) => {   
-    const char = event.target.textContent
+    console.log(index)
     const listOfChars = [...this.state.listOfChars]
-    const updatedText = this.state.text.replace(char, '');
-
     const updatedCharList = listOfChars.filter((charSet, set) => {
       return charSet.id !== index
     })
+    const updatedText = updatedCharList.map(char => char.char).join('')
+    console.log(updatedText)
+
 
     this.setState({
       listOfChars: updatedCharList,
@@ -55,14 +56,15 @@ class App extends React.Component {
                               .map((char, index) => {
                                 return (                          
                                   <div className={'char-container'}>
-                                    <ul key={index} className={'char-styling'}>                                        
+                                    <ul  className={'char-styling'}>                                        
                                           <CharComponent  deleteChar={(event) => this.deleteCharHandler(event, this.state.listOfChars[index].id)}
                                                           singleChar={char.char}
+                                                          key={this.state.listOfChars[index].id}
                                                            />                                        
                                       </ul>
                                   </div>)
     });
-
+    console.log(this.state.listOfChars)
     return (
       <div className="App">
         <h1>Min Length Is 6 characters</h1>
