@@ -10,7 +10,6 @@ body{
 }
 
 ul.char-styling li {
-  display: inline-block; 
   background-color: #fff;
   padding: 16px;
   float:left;
