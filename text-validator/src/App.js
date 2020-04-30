@@ -76,9 +76,7 @@ class App extends React.Component {
                 onChange={ this.getTextHandler }
                 value={ this.state.text } />
 
-        <ValidationComponent
-            textLength={ this.state.textLength }
-        />
+        <ValidationComponent textLength={ this.state.textLength }/>
         { charBox }
       </div>
     )
