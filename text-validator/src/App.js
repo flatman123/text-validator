@@ -27,7 +27,7 @@ class App extends React.Component {
                         return {id:index, char:char};
                       });
 
-      this.setState({
+    this.setState({
       textLength: textLength,
       text: text,
       listOfChars: listOfChars,
@@ -35,20 +35,18 @@ class App extends React.Component {
   }
 
   deleteCharHandler = ((event,index) => {   
-    console.log(index)
+    const updatedTextLength = this.state.textLength
     const listOfChars = [...this.state.listOfChars]
     const updatedCharList = listOfChars.filter((charSet, set) => {
       return charSet.id !== index
     })
     const updatedText = updatedCharList.map(char => char.char).join('')
-    console.log(updatedText)
-
-
+    updatedTextLength = updatedText.length;
     this.setState({
       listOfChars: updatedCharList,
-      text: updatedText
-    })
-
+      text: updatedText,
+      textLength: updatedTextLength
+    });
   });
 
   render(){
@@ -58,13 +56,11 @@ class App extends React.Component {
                                   <div key={this.state.listOfChars[index].id} className={'char-container'}>
                                     <ul  className={'char-styling'}>                                        
                                           <CharComponent  deleteChar={(event) => this.deleteCharHandler(event, this.state.listOfChars[index].id)}
-                                                          singleChar={char.char}
-                                                          
-                                                           />                                        
+                                                          singleChar={char.char}                                                         
+                                          />                                        
                                       </ul>
                                   </div>)
     });
-    console.log(this.state.listOfChars)
     return (
       <div className="App">
         <h1>Min Length Is 6 characters</h1>
