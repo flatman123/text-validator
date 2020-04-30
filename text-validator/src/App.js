@@ -35,13 +35,18 @@ class App extends React.Component {
   }
 
   deleteCharHandler = ((event,index) => {   
-    const updatedTextLength = this.state.textLength
-    const listOfChars = [...this.state.listOfChars]
+    let updatedTextLength = this.state.textLength;
+
+    const listOfChars = [...this.state.listOfChars];
+
     const updatedCharList = listOfChars.filter((charSet, set) => {
-      return charSet.id !== index
-    })
-    const updatedText = updatedCharList.map(char => char.char).join('')
+      return charSet.id !== index;
+    });
+
+    const updatedText = updatedCharList.map(char => char.char)
+                                       .join('')
     updatedTextLength = updatedText.length;
+
     this.setState({
       listOfChars: updatedCharList,
       text: updatedText,
@@ -51,28 +56,30 @@ class App extends React.Component {
 
   render(){
     const charBox = this.state.listOfChars
-                              .map((char, index) => {
-                                return (                          
-                                  <div key={this.state.listOfChars[index].id} className={'char-container'}>
-                                    <ul  className={'char-styling'}>                                        
-                                          <CharComponent  deleteChar={(event) => this.deleteCharHandler(event, this.state.listOfChars[index].id)}
-                                                          singleChar={char.char}                                                         
-                                          />                                        
-                                      </ul>
-                                  </div>)
+                        .map((char, index) => {
+                          return (
+
+                            <div key={ this.state.listOfChars[index].id } className={ 'char-container' }>
+                                <ul className={'char-styling'}>                                        
+                                    <CharComponent  deleteChar={ (event) => 
+                                                                this.deleteCharHandler(event, this.state.listOfChars[index].id) }
+                                                    singleChar={ char.char }                                                         
+                                    />                                        
+                                </ul>
+                            </div>)
     });
     return (
+
       <div className="App">
         <h1>Min Length Is 6 characters</h1>
-
         <input type='text'
-                onChange={this.getTextHandler}
-                value={this.state.text} />
+                onChange={ this.getTextHandler }
+                value={ this.state.text } />
 
-        <ValidationComponent a
-            textLength={this.state.textLength}
+        <ValidationComponent
+            textLength={ this.state.textLength }
         />
-        {charBox}
+        { charBox }
       </div>
     )
   }
